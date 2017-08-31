@@ -1,0 +1,19 @@
+<!-- <section>aaa</section> -->
+<form #personForm="ngForm" (ngSubmit)="addPerson()">
+  <div>
+      <label for="name">Name : </label>
+      <input [(ngModel)]="person.name" name="name" required >
+  </div>
+  
+  <div>
+      <label for="weight">Weight : </label>
+      <input [(ngModel)]="person.weight" name="weight" required >
+  </div>
+
+  <div>
+      <label for="height">Height : </label>
+      <input [(ngModel)]="person.height" name="height" required >
+  </div>
+  <button type="submit">Save</button>
+  <!-- <button type="button" (click)="gotoPeoplesList()">Back to peoples list</button> -->
+</form>

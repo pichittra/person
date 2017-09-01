@@ -1,19 +1,42 @@
-import { Component, OnInit,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { PersonService } from '../../services/person.service'
+import { PersonService } from '../../services/person.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  person: any=[];
-  constructor(private personService:PersonService) {       
+  count = 0;
+  id:any;
+  person = {
+    id:0,
+    name: '',
+    weight: '',
+    height: ''
   }
+
+  listPerson: any;
+  constructor(private personService: PersonService) {
+    this.personService;
+  }
+  
   ngOnInit() {
+    this.personService;
   }
-  addPerson(){
+  addPerson() {
     this.personService.savePerson(this.person);
+    this.person = {
+      id:0,
+      name: '',
+      weight: '',
+      height: ''
+    }
+  }
+  editPerson(person){
+    //console.log(person);
+    this.person = {...person};
+    //this.personService.getPerson();
   }
 
 }

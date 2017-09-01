@@ -1,0 +1,28 @@
+<!-- <ul>
+  <li *ngFor="let list of listPerson; let id=index">
+    {{list.name}}
+  </li>
+</ul> -->
+<table class="table" *ngIf="listPerson.length != 0">
+    <thead class="thead-inverse">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Weight</th>
+        <th>Height</th>
+        <th>Option</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let list of listPerson; let id=index">
+        <th >{{id+1}}</th>
+        <td>{{list.name}}</td>
+        <td>{{list.weight}}</td>
+        <td>{{list.height}}</td>
+        <td>
+          <i class="fa fa-pencil-square-o" (click)="editPerson(list)"></i>
+          <i class="fa fa-trash"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>

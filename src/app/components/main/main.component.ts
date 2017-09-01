@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 import { PersonService } from '../../services/person.service';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -8,35 +9,37 @@ import { PersonService } from '../../services/person.service';
 })
 export class MainComponent implements OnInit {
   count = 0;
-  id:any;
+  id: any;
   person = {
-    id:0,
+    id: 0,
     name: '',
     weight: '',
     height: ''
   }
+  name = new FormControl();
 
   listPerson: any;
   constructor(private personService: PersonService) {
     this.personService;
   }
-  
+
   ngOnInit() {
     this.personService;
   }
   addPerson() {
     this.personService.savePerson(this.person);
     this.person = {
-      id:0,
+      id: 0,
       name: '',
       weight: '',
       height: ''
     }
+    //this.listPerson = this.personService.getPerson();
   }
-  editPerson(person){
+  editPerson(person) {
     //console.log(person);
-    this.person = {...person};
-    //this.personService.getPerson();
+    this.person = { ...person };
+
   }
 
 }

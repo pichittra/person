@@ -23,6 +23,7 @@ export class MainComponent implements OnInit {
   
   createForm() {
     this.personForm = this.fb.group({
+      id: 0,
       name: ['', Validators.required ], // <--- the FormControl called "name"
       weight: ['', Validators.required ],
       height: ['', Validators.required ]
@@ -33,6 +34,7 @@ export class MainComponent implements OnInit {
     //this.personService;
     this.createForm();
     this.personForm.setValue({
+      id: 0,
       name: this.person.name,
       weight: this.person.weight,
       height : this.person.height,
@@ -42,17 +44,24 @@ export class MainComponent implements OnInit {
   ngOnInit() {
   }
   addPerson() {
-    this.personService.savePerson(this.person);
-    this.person = {
+    this.personService.savePerson(this.personForm.value);
+      this.personForm.setValue({
       id: 0,
       name: '',
       weight: '',
-      height: ''
-    }
+      height: '',
+    });
+  //this.personForm.reset();
   }
   editPerson(person) {
     this.person = { ...person };
-
+    this.personForm.setValue({
+      id: this.person.id,
+      name: this.person.name,
+      weight: this.person.weight,
+      height: this.person.height,
+    });
+    
   }
 
 }

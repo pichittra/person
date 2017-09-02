@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgForm, FormControl } from '@angular/forms';
+import { NgForm, FormControl, FormGroup, FormBuilder , Validators } from '@angular/forms';
 import { PersonService } from '../../services/person.service';
 
 @Component({
@@ -16,15 +16,30 @@ export class MainComponent implements OnInit {
     weight: '',
     height: ''
   }
-  name = new FormControl();
-
   listPerson: any;
-  constructor(private personService: PersonService) {
-    this.personService;
+
+  name = new FormControl();
+  personForm: FormGroup;
+  
+  createForm() {
+    this.personForm = this.fb.group({
+      name: ['', Validators.required ], // <--- the FormControl called "name"
+      weight: ['', Validators.required ],
+      height: ['', Validators.required ]
+    });
   }
 
+  constructor(private personService: PersonService, private fb: FormBuilder) {
+    //this.personService;
+    this.createForm();
+    this.personForm.setValue({
+      name: this.person.name,
+      weight: this.person.weight,
+      height : this.person.height,
+    });
+ 
+  }
   ngOnInit() {
-    this.personService;
   }
   addPerson() {
     this.personService.savePerson(this.person);
@@ -34,10 +49,8 @@ export class MainComponent implements OnInit {
       weight: '',
       height: ''
     }
-    //this.listPerson = this.personService.getPerson();
   }
   editPerson(person) {
-    //console.log(person);
     this.person = { ...person };
 
   }

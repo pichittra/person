@@ -1,21 +1,20 @@
 <!-- <section>aaa</section> -->
-<form #personForm="ngForm" (ngSubmit)="addPerson()">
-  <div>
-      <label for="name">Name : </label>
-      <input [(ngModel)]="person.name" name="name" required >
+<form [formGroup]="personForm" (ngSubmit)="addPerson(personForm.value)">
+  <div class="form-group">
+      <label for="person.name">Name : </label>
+      <input name="person.name" class="form-control" [(ngModel)]="person.name" formControlName="name" value="person.name" required >
   </div>
   
-  <div>
-      <label for="weight">Weight : </label>
-      <input [(ngModel)]="person.weight" name="weight" required >
+  <div class="form-group">
+      <label for="person.weight">Weight : </label>
+      <input name="person.weight" class="form-control" [(ngModel)]="person.weight" formControlName="weight" value="person.weight" required >
   </div>
 
-  <div>
-      <label for="height">Height : </label>
-      <input [(ngModel)]="person.height" name="height" required >
+  <div class="form-group">
+      <label for="person.height">Height : </label>
+      <input name="person.height" class="form-control" [(ngModel)]="person.height" formControlName="height" value="person.height" required >
   </div>
-  <button type="submit">Save</button>
-  <!-- <button type="button" (click)="gotoPeoplesList()">Back to peoples list</button> -->
+  <button type="submit" [disabled]="!personForm.valid">Save</button>
 </form>
 
   <app-list-person (editData)="editPerson($event)"></app-list-person> 
